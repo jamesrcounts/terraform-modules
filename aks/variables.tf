@@ -36,7 +36,9 @@ variable "resource_group" {
   })
 }
 
-variable "instance_id" {
-  type        = string
-  description = "(Required) Unique ID for this instance."
+variable "subnet" {
+  description = "(Required) The virtual network subnet for the cluster nodes."
+  type = object({
+    id = string
+  })
 }
