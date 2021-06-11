@@ -8,13 +8,13 @@ variable "environment" {
   type        = string
 }
 
-// variable "log_analytics_workspace" {
-//   description = "(Required) The module will use this log analytics workspace to configure diagnostics and Container Insights."
-//   type = object({
-//     id   = string
-//     name = string
-//   })
-// }
+variable "log_analytics_workspace" {
+  description = "(Required) The module will use this log analytics workspace to configure diagnostics and Container Insights."
+  type = object({
+    id   = string
+    name = string
+  })
+}
 
 // variable "configuration_resource_group" {
 //   description = "(Required) The module will read configuration data from this resource group."
