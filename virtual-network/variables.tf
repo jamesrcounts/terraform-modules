@@ -15,5 +15,5 @@ variable "resource_group" {
 
 variable "subnets" {
   description = "(Required) The subnets to create within the virtual network."
-  type        = map(string)
+  type        = map(tuple([number, number]))
 }
