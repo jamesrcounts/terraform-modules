@@ -12,3 +12,8 @@ variable "resource_group" {
     tags     = map(string)
   })
 }
+
+variable "subnets" {
+  description = "(Required) The subnets to create within the virtual network."
+  type        = map(string)
+}
