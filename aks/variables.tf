@@ -6,8 +6,10 @@ variable "environment" {
 variable "log_analytics_workspace" {
   description = "(Required) The module will use this log analytics workspace to configure diagnostics and Container Insights."
   type = object({
-    id   = string
-    name = string
+    id                  = string
+    name                = string
+    location            = string
+    resource_group_name = string
   })
 }
 
