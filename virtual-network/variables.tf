@@ -3,6 +3,13 @@ variable "environment" {
   type        = string
 }
 
+variable "log_analytics_workspace" {
+  description = "(Required) The module will use this log analytics workspace to configure diagnostics."
+  type = object({
+    id = string
+  })
+}
+
 variable "resource_group" {
   description = "(Required) The module will deploy resources into this resource group and copy tags from this resource group onto the resources."
   type = object({
