@@ -6,5 +6,9 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "~> 2"
     }
+    kustomization = {
+      source  = "kbst/kustomization"
+      version = "~> 0"
+    }
   }
 }
