@@ -1,5 +1,5 @@
 data "kustomization" "istio_operator" {
-  path = "./istio-operator"
+  path = "${path.module}/istio-operator"
 }
 
 resource "kustomization_resource" "istio_operator" {
