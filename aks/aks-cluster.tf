@@ -1,7 +1,6 @@
 resource "azurerm_kubernetes_cluster" "aks" {
   depends_on = [
-    azurerm_role_assignment.network_contributor,
-    azurerm_log_analytics_solution.insights
+    azurerm_role_assignment.network_contributor
   ]
 
   dns_prefix          = local.aks_cluster_name
