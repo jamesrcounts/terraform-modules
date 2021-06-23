@@ -7,7 +7,7 @@ data "kustomization_overlay" "istio_configuration" {
 
 resource "kustomization_resource" "istio_configuration" {
   for_each = {
-    for m in local.kmanifests : m => m
+    for m in local.kmanifests : m.id => m.manifest
   }
 
   manifest = each.value
@@ -26,7 +26,8 @@ locals {
   kmanifests = flatten([
     for k, v in local.manifests : [
       for id in data.kustomization_overlay.istio_configuration[k].ids : {
-        id = data.kustomization_overlay.istio_configuration[k].manifests[id]
+        id       = id
+        manifest = data.kustomization_overlay.istio_configuration[k].manifests[id]
       }
     ]
   ])
