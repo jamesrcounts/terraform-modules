@@ -23,7 +23,7 @@ locals {
 
   kmanifests = flatten([
     for key, path in local.manifests : [
-      for id in data.kustomization_overlay.istio_configuration[key].ids[0] : {
+      for id in data.kustomization_overlay.istio_configuration[key].ids : {
         id       = id
         manifest = data.kustomization_overlay.istio_configuration[key].manifests[id]
       }
