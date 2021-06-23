@@ -10,9 +10,5 @@ terraform {
       source  = "kbst/kustomization"
       version = "~> 0"
     }
-    local = {
-      source  = "hashicorp/local"
-      version = "~> 2"
-    }
   }
 }
