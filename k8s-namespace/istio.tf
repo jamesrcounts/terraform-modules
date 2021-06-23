@@ -3,11 +3,11 @@ data "kustomization_overlay" "istio_configuration" {
   resources = values(local.manifests)
 }
 
-resource "kustomization_resource" "istio_configuration" {
-  for_each = data.kustomization_overlay.istio_configuration.manifests
+// resource "kustomization_resource" "istio_configuration" {
+//   for_each = data.kustomization_overlay.istio_configuration.manifests
 
-  manifest = each.value
-}
+//   manifest = each.value
+// }
 
 locals {
   manifests = {
