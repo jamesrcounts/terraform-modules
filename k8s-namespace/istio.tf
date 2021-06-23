@@ -1,16 +1,19 @@
 data "kustomization_overlay" "istio_configuration" {
   namespace = kubernetes_namespace.ns.metadata.0.name
-  resources = values(local.manifests)
+  resources = [for k, v in local.manifests : v.path]
 }
 
-// resource "kustomization_resource" "istio_configuration" {
-//   for_each = data.kustomization_overlay.istio_configuration.manifests
+resource "kustomization_resource" "istio_configuration" {
+  for_each = local.manifests
 
-//   manifest = each.value
-// }
+  manifest = data.kustomization_overlay.istio_configuration.manifests[each.value.id]
+}
 
 locals {
   manifests = {
-    authn = "${path.module}/istio-configuration/authorization-policy.yaml"
+    authn = {
+      id   = "security.istio.io_v1beta1_AuthorizationPolicy|${kubernetes_namespace.ns.metadata.0.name}|allow-nothing"
+      path = "${path.module}/istio-configuration/authorization-policy.yaml"
+    }
   }
 }
