@@ -2,7 +2,7 @@ data "kustomization_overlay" "istio_configuration" {
   for_each = local.manifests
 
   namespace = kubernetes_namespace.ns.metadata.0.name
-  resources = each.value
+  resources = [each.value]
 }
 
 resource "kustomization_resource" "istio_configuration" {
