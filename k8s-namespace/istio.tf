@@ -10,15 +10,6 @@ resource "kustomization_resource" "istio_configuration" {
 }
 
 locals {
-  kmanifests = flatten([
-    for k, v in local.manifests : [
-      for id in data.kustomization_overlay.istio_configuration[k].ids : {
-        id       = id
-        manifest = data.kustomization_overlay.istio_configuration[k].manifests[id]
-      }
-    ]
-  ])
-
   manifests = {
     authn = "${path.module}/istio-configuration/authorization-policy.yaml"
   }
