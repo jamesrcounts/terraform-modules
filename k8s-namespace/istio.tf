@@ -1,14 +1,10 @@
 data "kustomization_overlay" "istio_configuration" {
-  for_each = local.manifests
-
   namespace = kubernetes_namespace.ns.metadata.0.name
-  resources = [each.value]
+  resources = values(local.manifests)
 }
 
 resource "kustomization_resource" "istio_configuration" {
-  for_each = {
-    for m in local.kmanifests : m.id => m.manifest
-  }
+  for_each = data.kustomization_overlay.istio_configuration.manifests
 
   manifest = each.value
 }
