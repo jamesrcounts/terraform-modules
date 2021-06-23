@@ -48,7 +48,8 @@
 		"ms-azuretools.vscode-docker",
 		"ms-azure-devops.azure-pipelines",
 		"mhutchie.git-graph",
-		"ms-dotnettools.csharp"
+		"ms-dotnettools.csharp",
+		"tyriar.sort-lines"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
