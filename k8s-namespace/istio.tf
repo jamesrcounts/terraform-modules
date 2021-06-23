@@ -7,7 +7,7 @@ data "kustomization_overlay" "istio_configuration" {
 
 resource "kustomization_resource" "istio_configuration" {
   for_each = {
-    for id, m in local.kmanifests : id => m
+    for m in local.kmanifests : m => m
   }
 
   manifest = each.value
