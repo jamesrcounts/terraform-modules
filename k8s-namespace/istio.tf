@@ -1,28 +1,27 @@
-// resource "local_file" "policy" {
-//   content = templatefile(
-//     "${path.module}/istio-configuration/authorization-policy.yaml.hcl",
-//     {
-//       namespace = kubernetes_namespace.ns.metadata.0.name
-//     }
-//   )
-//   filename = "${path.module}/istio-configuration/authorization-policy.yaml"
-// }
-
-// data "kustomization_build" "istio_configuration" {
-//   path = "${path.module}/istio-configuration"
-// }
-
 data "kustomization_overlay" "istio_configuration" {
-  namespace = kubernetes_namespace.ns.metadata.0.name
+  for_each = local.manifests
 
-  resources = [
-    "${path.module}/istio-configuration/authorization-policy.yaml"
-  ]
+  namespace = kubernetes_namespace.ns.metadata.0.name
+  resources = each.value
 }
 
 resource "kustomization_resource" "istio_configuration" {
-  for_each   = data.kustomization_overlay.istio_configuration.ids
-  depends_on = [kubernetes_namespace.ns]
+  for_each = { for m in local.kmanifests : m.manifest_id => m.manifest }
 
-  manifest = data.kustomization_overlay.istio_configuration.manifests[each.value]
+  manifest = each.value
+}
+
+locals {
+  kmanifests = flatten([
+    for overlay_key, overlay in data.kustomization_overlay.istio_configuration : [
+      for id in overlay.ids : {
+        manifest_id = "${overlay_key}${id}"
+        manifest    = overlay.manifests[id]
+      }
+    ]
+  ])
+
+  manifests = {
+    authn = "${path.module}/istio-configuration/authorization-policy.yaml"
+  }
 }
