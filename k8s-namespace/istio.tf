@@ -6,6 +6,6 @@ data "kustomization_overlay" "istio_configuration" {
 resource "kustomization_resource" "istio_configuration" {
   count = 1
 
-  manifest = data.kustomization_overlay.istio_configuration.manifests[count.index]
+  manifest = element(data.kustomization_overlay.istio_configuration.manifests, count.index)
 }
 
