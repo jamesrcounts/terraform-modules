@@ -4,8 +4,8 @@ data "kustomization_overlay" "istio_configuration" {
 }
 
 resource "kustomization_resource" "istio_configuration" {
-  for_each = data.kustomization_overlay.istio_configuration.manifests
+  count = 1
 
-  manifest = each.value
+  manifest = data.kustomization_overlay.istio_configuration.manifests[count.index]
 }
 
