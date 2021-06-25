@@ -50,6 +50,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     network_policy     = "calico"
     pod_cidr           = "10.244.0.0/16"
     service_cidr       = "10.0.0.0/16"
+
+    load_balancer_profile {
+      outbound_ip_address_ids = [azurerm_public_ip.aks.id]
+    }
   }
 
   role_based_access_control {
