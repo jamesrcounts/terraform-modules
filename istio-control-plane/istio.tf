@@ -1,7 +1,7 @@
 resource "helm_release" "istio_control_plane" {
   atomic     = true
   chart      = "control-plane"
-  lint       = true
+  lint       = false
   name       = "istio-control-plane"
   repository = "${path.module}/charts"
 
