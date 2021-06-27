@@ -1,7 +1,7 @@
 resource "helm_release" "istio_control_plane" {
   atomic     = true
   chart      = "control-plane"
-  lint       = false
+  lint       = true
   name       = "istio-control-plane"
   repository = "${path.module}/charts"
 
@@ -14,4 +14,14 @@ resource "helm_release" "istio_control_plane" {
     name  = "ingressGateway.ip.value"
     value = var.ingress_gateway.ip.value
   }
+}
+
+resource "helm_release" "istio_configuration" {
+  depend_on = [helm_release.istio_control_plane]
+  
+  atomic     = true
+  chart      = "default-configuration"
+  lint       = true
+  name       = "istio-configuration"
+  repository = "${path.module}/charts"
 }
