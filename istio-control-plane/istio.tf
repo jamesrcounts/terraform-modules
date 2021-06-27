@@ -17,8 +17,8 @@ resource "helm_release" "istio_control_plane" {
 }
 
 resource "helm_release" "istio_configuration" {
-  depend_on = [helm_release.istio_control_plane]
-  
+  depends_on = [helm_release.istio_control_plane]
+
   atomic     = true
   chart      = "default-configuration"
   lint       = true
