@@ -6,10 +6,6 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 2"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2"
-    }
     kustomization = {
       source  = "kbst/kustomization"
       version = "~> 0"
@@ -22,8 +18,8 @@ provider "azurerm" {
 }
 
 data "azurerm_kubernetes_cluster" "aks" {
-  name                = "aks-example"
-  resource_group_name = "rg-example"
+  name                = "aks-becoming-chicken-dmz"
+  resource_group_name = "rg-becoming-chicken"
 }
 
 provider "kustomization" {
