@@ -1,0 +1,4 @@
+ingressGateway:
+  ip:
+    resourceGroup: ""
+    value: ""

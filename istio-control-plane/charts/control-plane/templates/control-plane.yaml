@@ -1,0 +1,20 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: istio-control-plane
+spec:
+  profile: minimal
+  meshConfig:
+    outboundTrafficPolicy:
+      mode: REGISTRY_ONLY
+  components:
+    ingressGateways:
+    - name: istio-ingressgateway
+      enabled: true
+      k8s:
+        serviceAnnotations:
+          service.beta.kubernetes.io/azure-load-balancer-resource-group: {{ required "A resource group for the ingress gateway IP must be specified (ingressGateway.ip.resourceGroup)." .Values.ingressGateway.ip.resourceGroup }}
+        service:
+          type: LoadBalancer
+          loadBalancerIP: {{ required "An ingress gateway IP address must be specified (ingressGateway.ip.value)." .Values.ingressGateway.ip.value }}
