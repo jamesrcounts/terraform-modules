@@ -16,12 +16,12 @@ resource "helm_release" "istio_control_plane" {
   }
 }
 
-resource "helm_release" "istio_configuration" {
-  depends_on = [helm_release.istio_control_plane]
+// resource "helm_release" "istio_configuration" {
+//   depends_on = [helm_release.istio_control_plane]
 
-  atomic     = true
-  chart      = "default-configuration"
-  lint       = true
-  name       = "istio-configuration"
-  repository = "${path.module}/charts"
-}
+//   atomic     = true
+//   chart      = "default-configuration"
+//   lint       = true
+//   name       = "istio-configuration"
+//   repository = "${path.module}/charts"
+// }
