@@ -1,18 +1,27 @@
+{{- define "proxy.json" -}}
+{"discoveryAddress":"istiod-{{ required "A revision ID must be specified (revision)" .Values.revision }}.istio-system.svc:15012","proxyMetadata":{"DNS_AGENT":""}}
+{{- end }}
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 metadata:
+  name: istio-{{ required "A revision ID must be specified (revision)" .Values.revision }}
   namespace: istio-system
-  name: istio-control-plane
 spec:
   profile: minimal
+  revision: {{ required "A revision ID must be specified (revision)" .Values.revision }}
   meshConfig:
     outboundTrafficPolicy:
       mode: REGISTRY_ONLY
   components:
     ingressGateways:
     - name: istio-ingressgateway
+      namespace: {{ required "A namespace is required (ingressgateway.namespace)" .Values.ingressGateway.namespace }}
       enabled: true
       k8s:
+        env:
+          - name: PROXY_CONFIG
+            value: |
+              {{ include "proxy.json" . }}
         serviceAnnotations:
           service.beta.kubernetes.io/azure-load-balancer-resource-group: {{ required "A resource group for the ingress gateway IP must be specified (ingressGateway.ip.resourceGroup)." .Values.ingressGateway.ip.resourceGroup }}
         service:
