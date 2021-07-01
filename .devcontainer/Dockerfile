@@ -44,6 +44,8 @@ ARG TERRAGRUNT_VERSION=0.28.1
 RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" "${TERRAGRUNT_VERSION}" \
     && rm -rf /tmp/library-scripts
 
+# Install kubectl and helm
+RUN bash /tmp/library-scripts/kubectl-helm-debian.sh
 
 ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
 CMD [ "sleep", "infinity" ]
