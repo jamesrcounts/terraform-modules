@@ -6,6 +6,16 @@ resource "helm_release" "istio_control_plane" {
   repository = "${path.module}/charts"
 
   set {
+    name  = "revision"
+    value = var.revision
+  }
+
+  set {
+    name  = "ingressGateway.namespace"
+    value = var.ingress_gateway.namespace
+  }
+
+  set {
     name  = "ingressGateway.ip.resourceGroup"
     value = var.ingress_gateway.ip.resource_group
   }
