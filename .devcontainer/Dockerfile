@@ -41,11 +41,11 @@ RUN if [ "${INSTALL_AZURE_CLI}" = "true" ]; then bash /tmp/library-scripts/azcli
 ARG TERRAFORM_VERSION=0.12.16
 ARG TFLINT_VERSION=0.8.2
 ARG TERRAGRUNT_VERSION=0.28.1
-RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" "${TERRAGRUNT_VERSION}" \
-    && rm -rf /tmp/library-scripts
+RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" "${TERRAGRUNT_VERSION}" 
 
 # Install kubectl and helm
-RUN bash /tmp/library-scripts/kubectl-helm-debian.sh
+RUN bash /tmp/library-scripts/kubectl-helm-debian.sh \
+    && rm -rf /tmp/library-scripts
 
 ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
 CMD [ "sleep", "infinity" ]
