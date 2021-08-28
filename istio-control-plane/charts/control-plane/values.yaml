@@ -1,0 +1,6 @@
+revision: ""
+ingressGateway:
+  namespace: istio-system
+  ip:
+    resourceGroup: ""
+    value: ""
