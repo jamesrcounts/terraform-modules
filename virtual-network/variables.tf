@@ -22,5 +22,9 @@ variable "resource_group" {
 
 variable "subnets" {
   description = "(Required) The subnets to create within the virtual network."
-  type        = map(tuple([number, number]))
+  type = map(object({
+    bits                    = number
+    enable_private_endpoint = bool
+    net                     = number
+  }))
 }
