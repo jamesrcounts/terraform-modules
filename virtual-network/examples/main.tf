@@ -20,6 +20,10 @@ module "example" {
   }
 }
 
+output "virtual_network_id" {
+  value = module.example.virtual_network_id
+}
+
 resource "azurerm_log_analytics_workspace" "insights" {
   name                = "la-example"
   location            = azurerm_resource_group.example.location
