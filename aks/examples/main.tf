@@ -9,6 +9,10 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  features {}
+}
+
 resource "azurerm_resource_group" "example" {
   location = "centralus"
   name     = "rg-example"
@@ -40,6 +44,10 @@ resource "azurerm_subnet" "subnet" {
   name                 = "aks-subnet"
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.vnet.name
+}
+
+output "cluster_name" {
+  value = module.aks.cluster_name
 }
 
 module "aks" {

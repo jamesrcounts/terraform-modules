@@ -1,4 +1,4 @@
-default: validate
+default: plan
 
 init:
 	terraform init -backend=false -upgrade
@@ -9,3 +9,6 @@ fmt:
 
 validate: init fmt
 	terraform validate
+
+plan: validate
+	terraform plan -out plan.tfplan
