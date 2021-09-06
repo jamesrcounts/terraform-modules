@@ -1,5 +1,10 @@
-variable "environment" {
-  description = "(Required) The environment tag, examples: dev, tst, prd."
+variable "admin_group_object_id" {
+  description = "(Required) An Object ID of the Azure Active Directory Groups which should have Admin Role on the Cluster."
+  type        = string
+}
+
+variable "resource_suffix" {
+  description = "(Required) A tag to specialize the deployments."
   type        = string
 }
 

@@ -13,6 +13,11 @@ provider "azurerm" {
   features {}
 }
 
+resource "azuread_group" "aks_administrators" {
+  display_name = "example-administrators"
+  description  = "Kubernetes administrators for the example cluster."
+}
+
 resource "azurerm_resource_group" "example" {
   location = "centralus"
   name     = "rg-example"
@@ -53,8 +58,9 @@ output "cluster_name" {
 module "aks" {
   source = "../"
 
+  admin_group_object_id   = azuread_group.aks_administrators.object_id
   log_analytics_workspace = azurerm_log_analytics_workspace.insights
   resource_group          = azurerm_resource_group.example
+  resource_suffix         = "example"
   subnet                  = azurerm_subnet.subnet
-  environment             = "example"
 }

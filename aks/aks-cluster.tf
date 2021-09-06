@@ -7,7 +7,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version  = data.azurerm_kubernetes_service_versions.current.latest_version
   location            = var.resource_group.location
   name                = local.aks_cluster_name
-  node_resource_group = "${var.resource_group.name}-${var.environment}-aks"
+  node_resource_group = "${var.resource_group.name}-${var.resource_suffix}-aks"
   resource_group_name = var.resource_group.name
   tags                = var.resource_group.tags
 
@@ -60,7 +60,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     enabled = true
     azure_active_directory {
       managed                = true
-      admin_group_object_ids = [azuread_group.aks_administrators.object_id]
+      admin_group_object_ids = [var.admin_group_object_id]
     }
   }
 }
