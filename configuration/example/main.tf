@@ -6,7 +6,7 @@ module "configuration" {
 }
 
 locals {
-  instance_id = "brief-anteater"
+  instance_id = "upward-badger"
 }
 
 output "ids" {
@@ -15,6 +15,10 @@ output "ids" {
 
 output "subnets" {
   value = nonsensitive(module.configuration.imports["subnets"])
+}
+
+output "tenant_id" {
+  value = module.configuration.key_vault.tenant_id
 }
 
 provider "azurerm" {
