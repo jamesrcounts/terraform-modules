@@ -2,6 +2,7 @@ module "example" {
   source = "../"
 
   eventhub_connection_string = azurerm_eventhub_authorization_rule.wo.primary_connection_string
+  eventhub_name              = local.evh_name
 }
 
 resource "azurerm_eventhub_authorization_rule" "wo" {
