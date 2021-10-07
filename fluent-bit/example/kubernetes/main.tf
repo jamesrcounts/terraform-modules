@@ -27,6 +27,7 @@ resource "azurerm_resource_group" "main" {
   location = "centralus"
   tags = {
     "instance_id" = local.instance_id
+    "project" = "fluent-bit-module"
   }
 }
 
