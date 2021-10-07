@@ -1,3 +1,9 @@
+variable "chart_version" {
+  default     = "0.19.0"
+  description = "(Optional) The chart version to install.  Defaults to `0.19.0`."
+  type        = string
+}
+
 variable "eventhub_connection_string" {
   description = "(Required) A connection string for an Event Hubs authorization Rule with permission to send. Fluent Bit uses this as the Kafka password."
   type        = string
