@@ -12,3 +12,8 @@ variable "eventhub_namespace_name" {
   description = "(Required) The name of the EventHub Namespace. Fluent Bit uses this as the Kafka broker."
   type        = string
 }
+
+variable "kubernetes_namespace" {
+  description = "(Required) The namespace to install the release into."
+  type        = string
+}

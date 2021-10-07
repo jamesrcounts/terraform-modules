@@ -4,6 +4,13 @@ module "example" {
   eventhub_connection_string = azurerm_eventhub_authorization_rule.wo.primary_connection_string
   eventhub_name              = local.evh_name
   eventhub_namespace_name    = local.evhns_name
+  kubernetes_namespace       = kubernetes_namespace.logging.metadata.0.name
+}
+
+resource "kubernetes_namespace" "logging" {
+  metadata {
+    name = "logging"
+  }
 }
 
 resource "azurerm_eventhub_authorization_rule" "wo" {
