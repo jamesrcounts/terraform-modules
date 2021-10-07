@@ -7,3 +7,8 @@ variable "eventhub_name" {
   description = "(Required) The name of the EventHub. Fluent Bit uses this as the Kafka topic."
   type        = string
 }
+
+variable "eventhub_namespace_name" {
+  description = "(Required) The name of the EventHub Namespace. Fluent Bit uses this as the Kafka broker."
+  type        = string
+}
