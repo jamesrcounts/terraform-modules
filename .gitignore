@@ -1,4 +1,4 @@
-**/plan.tfplan
+**/*.tfplan
 
 # Local .terraform directories
 **/.terraform/*
@@ -33,3 +33,4 @@ override.tf.json
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 **/.DS_Store
+fluent-bit/example/kubernetes/k8s.tfplan
