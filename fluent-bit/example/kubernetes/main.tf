@@ -23,7 +23,7 @@ data "azurerm_kubernetes_service_versions" "current" {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "rg-backend-${local.instance_id}"
+  name     = "rg-${local.instance_id}"
   location = "centralus"
   tags = {
     "instance_id" = local.instance_id
