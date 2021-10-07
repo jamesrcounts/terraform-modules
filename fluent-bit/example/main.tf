@@ -57,3 +57,7 @@ locals {
   instance_id = random_pet.instance_id.id
   tags        = azurerm_resource_group.main.tags
 }
+
+provider "azurerm" {
+  features {}
+}
