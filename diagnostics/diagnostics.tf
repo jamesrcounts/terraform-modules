@@ -14,7 +14,7 @@ resource "azurerm_monitor_diagnostic_setting" "setting" {
   name                           = "diag-${each.key}"
   target_resource_id             = each.value
   log_analytics_workspace_id     = var.log_analytics_workspace_id
-  log_analytics_destination_type = contains(local.dedicated_tables, each.key) ? "Dedicated" : null
+  log_analytics_destination_type = contains(local.dedicated_tables, each.key) ? "AzureDiagnostics" : null
 
   dynamic "log" {
     for_each = data.azurerm_monitor_diagnostic_categories.categories[each.key].logs
